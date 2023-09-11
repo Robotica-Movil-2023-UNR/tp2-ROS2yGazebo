@@ -1,0 +1,16 @@
+version: "3.7"
+# maintainer="Martin Nievas<devel@martinnievas.ar>"
+
+services:
+  tp2-ros-gazebo:
+    image: tp2-ros-gazebo:latest
+    build:
+      context: .
+      dockerfile: tp2-ros-gazebo.Dockerfile
+    shm_size: 512m
+    security_opt:
+      - seccomp=unconfined
+    ports:
+      - 6080:80
+    volumes:
+      - ${PWD}/tp2/:/home/ubuntu/catkin_ws/src/tp2
