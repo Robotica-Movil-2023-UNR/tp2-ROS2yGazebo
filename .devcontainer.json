@@ -1,0 +1,11 @@
+
+{
+    "name": "tp2",
+    "service": "tp2",
+    "dockerComposeFile": "./docker-compose.yaml",
+    "extensions": [
+        "ms-iot.vscode-ros"
+    ],
+    "workspaceFolder": "/home/tp2/ws",
+    "shutdownAction": "stopCompose"
+}
