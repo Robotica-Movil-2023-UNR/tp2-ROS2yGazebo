@@ -3,6 +3,8 @@ FROM tiryoh/ros2-desktop-vnc:humble
 RUN apt-get update && apt-get install -y \
       ros-humble-turtlebot3* \
       ros-humble-nav2-bringup \
+      ros-humble-tf-transformations \
+      && pip3 install transforms3d \
       && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /home/ubuntu/catkin_ws
