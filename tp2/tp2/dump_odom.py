@@ -25,12 +25,12 @@ class DumpOdom(Node):
         orientation_list = [quat.x, quat.y, quat.z, quat.w]
         (_, _, yaw) = euler_from_quaternion(orientation_list)
 
-        print(str(self.get_clock().now().to_msg().sec) + '.' + \
-        str(self.get_clock().now().to_msg().nanosec) + '\t' + \
+        print(str(msg.header.stamp.sec+msg.header.stamp.nanosec/1000000000) + '\t' + \
         str(msg.pose.pose.position.x) + '\t' + \
         str(msg.pose.pose.position.y) + '\t' + str(yaw) + '\t' + \
         str(msg.twist.twist.linear.x) + '\t' + \
         str(msg.twist.twist.angular.z))
+
 
 def main(args=None):
     rclpy.init(args=args)
