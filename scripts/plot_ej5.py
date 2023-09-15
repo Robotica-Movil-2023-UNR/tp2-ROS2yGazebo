@@ -37,6 +37,7 @@ try:
     ax3=fig.add_subplot(gs[1,1])
     ax4=fig.add_subplot(gs[2,1])
     ax5=fig.add_subplot(gs[3,1])
+    delta_t = 40
 
     ax1.set_aspect('equal', adjustable='box')
     ax1.plot(x,y)
@@ -48,7 +49,7 @@ try:
     ax2.set_xlabel('t')
     ax2.set_ylabel('x[m]')
     ax2.grid()
-    ax2.set_xticks(np.arange(0, len(x), 20))
+    ax2.set_xticks(np.arange(0, len(x), delta_t))
     ax2.set_yticks(np.arange(min(x), max(x), 0.5))
     ax2.set_title('Posición x del robot respecto al tiempo')
 
@@ -56,7 +57,7 @@ try:
     ax3.set_xlabel('t')
     ax3.set_ylabel('y[m]')
     ax3.grid()
-    ax3.set_xticks(np.arange(0, len(y), 20))
+    ax3.set_xticks(np.arange(0, len(y), delta_t))
     ax3.set_yticks(np.arange(min(y), max(y), 0.5))
     ax3.set_title('Posición y del robot respecto al tiempo')
 
@@ -65,7 +66,7 @@ try:
     ax4.set_ylabel('vx')
     ax4.set_title('Velocidad lineal del robot respecto al tiempo')
     ax4.grid()
-    ax4.set_xticks(np.arange(0, len(vx), 20))
+    ax4.set_xticks(np.arange(0, len(vx), delta_t))
     ax4.set_yticks(np.arange(min(vx)-1, max(vx)+1, 0.5))
 
     ax5.plot(vz)
@@ -73,7 +74,7 @@ try:
     ax5.set_ylabel('vz')
     ax5.set_title('Velocidad angular del robot respecto al tiempo')
     ax5.grid()
-    ax5.set_xticks(np.arange(0, len(vz), 20))
+    ax5.set_xticks(np.arange(0, len(vz), delta_t))
     ax5.set_yticks(np.arange(min(vz)-1, max(vz)+1, 0.5))
     plt.show()
 
