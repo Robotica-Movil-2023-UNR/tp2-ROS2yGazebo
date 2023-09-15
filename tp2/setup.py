@@ -20,7 +20,8 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'ej5 = tp2.ej5:main'
+            'ej5 = tp2.ej5:main',
+            'dump_odom = tp2.dump_odom:main'
         ],
     },
 )
