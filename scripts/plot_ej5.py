@@ -7,7 +7,7 @@ from matplotlib.gridspec import GridSpec
 import numpy as np
 
 if len(sys.argv) < 2:
-    file_path = "../tp2/logs/log0.txt"
+    file_path = "../tp2/logs/log_ej5.txt"
 else:
     file_path = sys.argv[1]
 
@@ -43,6 +43,9 @@ try:
     ax1.plot(x,y)
     ax1.set_xlabel('x')
     ax1.set_ylabel('y')
+    ax1.grid()
+    ax1.set_xticks(np.arange(min(x), max(x) + 0.5, 0.25))
+    ax1.set_yticks(np.arange(min(y), max(y) + 0.5, 0.25))
     ax1.set_title('Camino seguido por el robot')
 
     ax2.plot(x)
