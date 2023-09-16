@@ -21,7 +21,8 @@ setup(
     entry_points={
         'console_scripts': [
             'ej5 = tp2.ej5:main',
-            'dump_odom = tp2.dump_odom:main'
+            'dump_odom = tp2.dump_odom:main',
+            'ej7_controller = tp2.ej7_controller:main'
         ],
     },
 )
