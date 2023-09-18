@@ -40,6 +40,7 @@ RUN apt-get update && \
       ros-$ROS_DISTRO-nav2-bringup \
       ros-humble-gazebo-* \
       ros-$ROS_DISTRO-turtlebot3*  \
+      python3-pip \
       htop && \
       pip3 install transforms3d && \
       apt-get autoremove -y && \
@@ -55,6 +56,7 @@ RUN echo 'Crear usuario para no generar archivos como root'; \
 RUN echo "source /opt/ros/$ROS_DISTRO/setup.bash" >> ~/.bashrc
 RUN echo "export TURTLEBOT3_MODEL=waffle" >> ~/.bashrc
 RUN echo "export GAZEBO_MODEL_PATH=$GAZEBO_MODEL_PATH:/opt/ros/humble/share/turtlebot3_gazebo/models" >> ~/.bashrc
+RUN echo "export PYTHONWARNINGS='ignore:setup.py install is deprecated::setuptools.command.install'"  >> ~/.bashrc
 
 USER ${USERNAME}:${USERNAME}
 
