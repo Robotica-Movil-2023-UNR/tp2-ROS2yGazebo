@@ -1,13 +1,21 @@
-ARG ROS_DISTRO=humble
+# FROM ros:humble-perception
 
-FROM osrf/ros:$ROS_DISTRO-desktop-full
+# RUN apt-get update && \
+#     apt-get install -y --no-install-recommends \
+#     lsb-release \
+#     wget \
+#     gnupg \
+#     ros-humble-turtlesim \
+#     ros-humble-rqt* \
+#     ros-humble-navigation2 \
+#     ros-humble-nav2-bringup \
+#     ros-humble-turtlebot3* \
+#     ros-humble-gazebo-* \
+#     ros-humble-demo-nodes-cpp \
+#     ros-humble-demo-nodes-py && \
+#     rm -rf /var/lib/apt/lists/*
 
-RUN apt-get update && apt-get install -y \
-      ros-humble-turtlebot3* \
-      ros-humble-nav2-bringup \
-      && rm -rf /var/lib/apt/lists/*
-
-RUN ["/bin/bash", "-c", "source /opt/ros/humble/setup.bash"]
+# RUN ["/bin/bash", "-c", "source /opt/ros/humble/setup.bash"]
 
 # WORKDIR /home/tp2/ws
 # RUN mkdir /home/tp2/ws/src
@@ -18,32 +26,36 @@ RUN ["/bin/bash", "-c", "source /opt/ros/humble/setup.bash"]
 
 # ENTRYPOINT [ "/bin/bash", "-c", "/home/tp2/entrypoint.sh" ]
 
-# # ARG USERNAME=tp2
-# # ARG USERID=1000
-# ARG HOME=/home/tp2
-# ENV DEBIAN_FRONTEND noninteractive
+FROM osrf/ros:humble-desktop-full
+ARG USERNAME=tp2
+ARG USERID=1000
+ARG HOME=/home/tp2
+ENV DEBIAN_FRONTEND noninteractive
 
-# # Instalación nav2
+# Instalación nav2
 # RUN apt update && apt upgrade -y && apt install -y \
-#         ros-$ROS_DISTRO-turtlesim \
-#         ros-$ROS_DISTRO-rqt* \
-#         ros-$ROS_DISTRO-navigation2 \
-#         ros-$ROS_DISTRO-nav2-bringup \
-#         ros-$ROS_DISTRO-turtlebot3* \
-#         ros-$ROS_DISTRO-gazebo-* \
-#         ros-$ROS_DISTRO-pointcloud-to-laserscan && \
-#     apt-get autoremove -y && \
-#     apt-get clean && \
-#     rm -rf /var/lib/apt/lists/*
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \        
+      ros-$ROS_DISTRO-navigation2 \
+      ros-$ROS_DISTRO-nav2-bringup \
+      ros-humble-gazebo-* \
+      ros-$ROS_DISTRO-turtlebot3*  \
+      htop && \
+      pip3 install transforms3d && \
+      apt-get autoremove -y && \
+      apt-get clean && \
+      rm -rf /var/lib/apt/lists/*
 
-# # RUN echo 'Crear usuario para no generar archivos como root'; \
-# #     groupadd -f -g ${USERID} ${USERNAME}; \
-# #     useradd -g ${USERID} -u ${USERID} -d ${HOME} -ms /bin/bash ${USERNAME}; \
-# #     usermod -aG sudo ${USERNAME} ; \
-# #     echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
+RUN echo 'Crear usuario para no generar archivos como root'; \
+    groupadd -f -g ${USERID} ${USERNAME}; \
+    useradd -g ${USERID} -u ${USERID} -d ${HOME} -ms /bin/bash ${USERNAME}; \
+    usermod -aG sudo ${USERNAME} ; \
+    echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
-# RUN echo "source /opt/ros/$ROS_DISTRO/setup.bash" >> ~/.bashrc
+RUN echo "source /opt/ros/$ROS_DISTRO/setup.bash" >> ~/.bashrc
+RUN echo "export TURTLEBOT3_MODEL=waffle" >> ~/.bashrc
+RUN echo "export GAZEBO_MODEL_PATH=$GAZEBO_MODEL_PATH:/opt/ros/humble/share/turtlebot3_gazebo/models" >> ~/.bashrc
 
-# # USER ${USERNAME}:${USERNAME}
+USER ${USERNAME}:${USERNAME}
 
-# WORKDIR ${HOME}
+WORKDIR ${HOME}
