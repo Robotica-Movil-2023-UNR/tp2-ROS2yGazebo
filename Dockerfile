@@ -51,13 +51,14 @@ RUN echo 'Crear usuario para no generar archivos como root'; \
     groupadd -f -g ${USERID} ${USERNAME}; \
     useradd -g ${USERID} -u ${USERID} -d ${HOME} -ms /bin/bash ${USERNAME}; \
     usermod -aG sudo ${USERNAME} ; \
-    echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
+    echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers; \
+    chown ${USERNAME}:${USERNAME} ${HOME}
+
+USER ${USERNAME}:${USERNAME}
 
 RUN echo "source /opt/ros/$ROS_DISTRO/setup.bash" >> ~/.bashrc
 RUN echo "export TURTLEBOT3_MODEL=waffle" >> ~/.bashrc
 RUN echo "export GAZEBO_MODEL_PATH=$GAZEBO_MODEL_PATH:/opt/ros/humble/share/turtlebot3_gazebo/models" >> ~/.bashrc
 RUN echo "export PYTHONWARNINGS='ignore:setup.py install is deprecated::setuptools.command.install'"  >> ~/.bashrc
-
-USER ${USERNAME}:${USERNAME}
 
 WORKDIR ${HOME}
