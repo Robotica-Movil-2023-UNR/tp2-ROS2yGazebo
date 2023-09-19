@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 import re
 
 def main():
-    odom_path = "../logs/log_circular.txt"
+    odom_path = "ws_tp2/src/tp2/logs/log_circular.txt"
     odom_trajectory = []
     velos = []
 
@@ -80,17 +80,54 @@ def main():
     ax2[2].plot(pose_tbl[pos2,0], pose_tbl[pos2,3], 'xg')
     ax2[2].plot(pose_tbl[pos3,0], pose_tbl[pos3,3], 'xg')
     
-    # Show the plot
-    plt.show()
-
     # Punto a, el rango de X e Y y por qué
 
     # Punto b el rango de Yaw y por qué
 
     # Punto c. Diversos graficos con todas las posibilidades de signos de las velocidades
     # Indicar en el gráfico el sentido de avance del robot
+    ## Parsear los datos del archivo log_cirXX.txt
+    circ_path = ["ws_tp2/src/tp2/logs/log_cir1.txt",  "ws_tp2/src/tp2/logs/log_cir2.txt", "ws_tp2/src/tp2/logs/log_cir3.txt", "ws_tp2/src/tp2/logs/log_cir4.txt"]
+    lista = []
+    t = []
+    x = []
+    y = []
+    
+    fig5, axs5 = plt.subplots(2,2)
+    # # fig.subplots_adjust(hspace = .5, wspace=.001)
+    axs = axs5.ravel()
+    axs[0].title.set_text('v+, w+')
+    axs[1].title.set_text('v+, w-')
+    axs[2].title.set_text('v-, w-')
+    axs[3].title.set_text('v-, w+')
+    # axs.set_aspect('equal')
+    for a in axs5.flat:
+        a.set_aspect('equal')
 
+    for idx in range(len(circ_path)):
+        with open(circ_path[idx], 'r') as file:
+            csv_reader = csv.reader(file, delimiter='\t')
+            for row in csv_reader:
+                # Obtengo los segundos y nanosegundos del string y armo el timestamp
+                tmp = re.findall(r'\b\d+\b', row[0])
+                row[0] = float(tmp[0]) + float(tmp[1])/1e9
+                t.append(row[0])
+                x.append(float(row[1]))
+                y.append(float(row[2]))
+        # print(len(x))
+        axs[idx].plot(x, y, 'b', label='Camino')
+        # axs[idx].set_xlim(-10, 20)
+        # axs[idx].set_ylim(-10, 20)
+        lista.append([t, x, y])
+        t=[]
+        x=[]
+        y=[]
+        file.close()
+        
     # Punto d. Describir la secuencia de comandos para que haga un cuadrado
+
+    # Show the plot
+    plt.show()
 
 if __name__ == "__main__":
     main()        
