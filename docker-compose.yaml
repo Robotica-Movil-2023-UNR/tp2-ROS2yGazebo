@@ -19,9 +19,9 @@ services:
       - QT_X11_NO_MITSHM = 1
     # runtime: nvidia
     volumes:
-      - ./ws_tp2:/home/tp2/ws_tp2
-      # - /etc/timezone:/etc/timezone:ro
-      # - /etc/localtime:/etc/localtime:ro
+      - ./ws_tp2:/ws_tp2
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
       - /tmp/.X11-unix:/tmp/.X11-unix:ro
     # devices:
       # - /dev:/dev

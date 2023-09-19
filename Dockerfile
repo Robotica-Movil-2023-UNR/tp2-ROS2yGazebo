@@ -27,8 +27,8 @@
 # ENTRYPOINT [ "/bin/bash", "-c", "/home/tp2/entrypoint.sh" ]
 
 FROM osrf/ros:humble-desktop-full
-ARG USERNAME=tp2
-ARG USERID=1000
+# ARG USERNAME=tp2
+# ARG USERID=1000
 ARG HOME=/home/tp2
 ENV DEBIAN_FRONTEND noninteractive
 
@@ -38,8 +38,8 @@ RUN apt-get update && \
     apt-get install -y --no-install-recommends \        
       ros-$ROS_DISTRO-navigation2 \
       ros-$ROS_DISTRO-nav2-bringup \
-      ros-humble-gazebo-* \
       ros-$ROS_DISTRO-turtlebot3*  \
+      ros-$ROS_DISTRO-tf-transformations \
       python3-pip \
       htop && \
       pip3 install transforms3d && \
@@ -47,18 +47,20 @@ RUN apt-get update && \
       apt-get clean && \
       rm -rf /var/lib/apt/lists/*
 
-RUN echo 'Crear usuario para no generar archivos como root'; \
-    groupadd -f -g ${USERID} ${USERNAME}; \
-    useradd -g ${USERID} -u ${USERID} -d ${HOME} -ms /bin/bash ${USERNAME}; \
-    usermod -aG sudo ${USERNAME} ; \
-    echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers; \
-    chown ${USERNAME}:${USERNAME} ${HOME}
+# RUN echo 'Crear usuario para no generar archivos como root'; \
+#     groupadd -f -g ${USERID} ${USERNAME}; \
+#     useradd -g ${USERID} -u ${USERID} -d ${HOME} -ms /bin/bash ${USERNAME}; \
+#     usermod -aG sudo ${USERNAME} ; \
+#     echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers; \
+#     chown ${USERNAME}:${USERNAME} ${HOME}
 
-USER ${USERNAME}:${USERNAME}
+# USER ${USERNAME}:${USERNAME}
 
-RUN echo "source /opt/ros/$ROS_DISTRO/setup.bash" >> ~/.bashrc
-RUN echo "export TURTLEBOT3_MODEL=waffle" >> ~/.bashrc
-RUN echo "export GAZEBO_MODEL_PATH=$GAZEBO_MODEL_PATH:/opt/ros/humble/share/turtlebot3_gazebo/models" >> ~/.bashrc
-RUN echo "export PYTHONWARNINGS='ignore:setup.py install is deprecated::setuptools.command.install'"  >> ~/.bashrc
+RUN echo "source /opt/ros/$ROS_DISTRO/setup.bash" >> /root/.bashrc
+RUN echo "export TURTLEBOT3_MODEL=waffle" >> /root/.bashrc
+RUN echo "export GAZEBO_MODEL_PATH=$GAZEBO_MODEL_PATH:/opt/ros/humble/share/turtlebot3_gazebo/models" >> /root/.bashrc
+RUN echo "export PYTHONWARNINGS='ignore:setup.py install is deprecated::setuptools.command.install'"  >> /root/.bashrc
 
-WORKDIR ${HOME}
+# CMD /bin/bash -c "source /root/.bashrc"
+
+# WORKDIR ${HOME}
