@@ -20,6 +20,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
+            'ejer7_log_path_cirrcular = tp2.ejer7_log_path_cirrcular:main'
         ],
     },
 )
