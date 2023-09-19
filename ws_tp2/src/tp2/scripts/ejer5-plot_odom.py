@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 import re
 
 def main():
-    odom_path = "./src/log.txt"
+    odom_path = "../logs/log.txt"
     odom_trajectory = []
     velos = []
 
