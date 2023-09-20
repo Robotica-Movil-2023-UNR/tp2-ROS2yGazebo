@@ -39,7 +39,7 @@ def main():
     ax1.plot(pose_tbl[:,1], pose_tbl[:,2], 'b', label='Camino')
     ax1.legend()
     ax1.set_ylabel('Y [mts]')
-    ax1.set_ylabel('X [mts]')
+    ax1.set_xlabel('X [mts]')
     ax1.grid()
 
     # Trayectoria o pose vs tiempo
@@ -57,6 +57,7 @@ def main():
     ax2[1].grid()
     ax2[2].legend()
     ax2[2].set_ylabel('[rad]')
+    ax2[2].set_xlabel('[seg]')
     ax2[2].grid()
 
     # Elegir 3 puntos y marcarlos en los graficos
@@ -88,21 +89,14 @@ def main():
     # Indicar en el gráfico el sentido de avance del robot
     ## Parsear los datos del archivo log_cirXX.txt
     circ_path = ["ws_tp2/src/tp2/logs/log_cir1.txt",  "ws_tp2/src/tp2/logs/log_cir2.txt", "ws_tp2/src/tp2/logs/log_cir3.txt", "ws_tp2/src/tp2/logs/log_cir4.txt"]
-    lista = []
+    colores = ['b', 'g', 'r', 'k']
+    titulos = ['v+, w+', 'v+, w-', 'v-, w-', 'v-, w+']
     t = []
     x = []
     y = []
     
-    fig5, axs5 = plt.subplots(2,2)
-    # # fig.subplots_adjust(hspace = .5, wspace=.001)
-    axs = axs5.ravel()
-    axs[0].title.set_text('v+, w+')
-    axs[1].title.set_text('v+, w-')
-    axs[2].title.set_text('v-, w-')
-    axs[3].title.set_text('v-, w+')
-    # axs.set_aspect('equal')
-    for a in axs5.flat:
-        a.set_aspect('equal')
+    fig3, axs3 = plt.subplots(2,2)
+    axs = axs3.ravel()
 
     for idx in range(len(circ_path)):
         with open(circ_path[idx], 'r') as file:
@@ -114,11 +108,24 @@ def main():
                 t.append(row[0])
                 x.append(float(row[1]))
                 y.append(float(row[2]))
-        # print(len(x))
-        axs[idx].plot(x, y, 'b', label='Camino')
-        # axs[idx].set_xlim(-10, 20)
-        # axs[idx].set_ylim(-10, 20)
-        lista.append([t, x, y])
+        # Ploteo los datos de este archivo
+        axs[idx].plot(x, y, colores[idx], label='Camino')
+        # Tomo 3 muestras, al principio, a 1/3 y 2/3 de la curva
+        adx0, adx1 = 0, len(x) // 3
+        adx2 = adx1 * 2
+        # Creo las flechas
+        arrow0 = x[adx0+1], y[adx0+1], x[adx0+1]-x[adx0], y[adx0+1]-y[adx0]
+        arrow1 = x[adx1+1], y[adx1+1], x[adx1+1]-x[adx1], y[adx1+1]-y[adx1]
+        arrow2 = x[adx2+1], y[adx2+1], x[adx2+1]-x[adx2], y[adx2+1]-y[adx2]
+        # Las grafico
+        axs[idx].arrow(*arrow0, shape='full', lw=0, length_includes_head=True, head_width=0.12, color=colores[idx])
+        axs[idx].arrow(*arrow1, shape='full', lw=0, length_includes_head=True, head_width=0.12, color=colores[idx])
+        axs[idx].arrow(*arrow2, shape='full', lw=0, length_includes_head=True, head_width=0.12, color=colores[idx])
+        # Hago que los ejes mantengan el aspecto entre los ejes
+        axs[idx].set_aspect('equal')
+        axs[idx].grid()
+        axs[idx].title.set_text(titulos[idx])
+        # Re-inicializo las listas
         t=[]
         x=[]
         y=[]
