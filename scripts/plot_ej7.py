@@ -76,7 +76,7 @@ try:
     timestamp_markers = [len(new_t)//5, len(new_t)//2, 2*len(new_t)//3]
     colors = ['red', 'green', 'blue']
     for timestamp,color in zip(timestamp_markers, colors):
-        ax1.plot(x[timestamp], y[timestamp], 'o', color=color)
+        ax1.plot(x[timestamp], y[timestamp], marker=(3, 0, -90+theta[timestamp]*180/np.pi), linestyle='None', markersize=20, color=color)
         ax2.plot(new_t[timestamp], x[timestamp], 'o', color=color)
         ax3.plot(new_t[timestamp], y[timestamp], 'o', color=color)
         ax4.plot(new_t[timestamp], theta[timestamp], 'o', color=color)
