@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 import re
 
 def main():
-    odom_path = "../logs/log_circular.txt"
+    odom_path = "ws_tp2/src/tp2/logs/log_circular.txt"
     odom_trajectory = []
     velos = []
 
@@ -37,7 +37,7 @@ def main():
     ax1.plot(pose_tbl[:,1], pose_tbl[:,2], 'b', label='Camino')
     ax1.legend()
     ax1.set_ylabel('Y [mts]')
-    ax1.set_ylabel('X [mts]')
+    ax1.set_xlabel('X [mts]')
     ax1.grid()
 
     # Punto b, trayectoria o pose vs tiempo
@@ -55,6 +55,7 @@ def main():
     ax2[1].grid()
     ax2[2].legend()
     ax2[2].set_ylabel('[rad]')
+    ax2[2].set_xlabel('[seg]')
     ax2[2].grid()
 
     # Show the plot
