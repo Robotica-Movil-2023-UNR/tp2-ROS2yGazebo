@@ -4,12 +4,14 @@ import csv
 import numpy as np
 import matplotlib.pyplot as plt
 import re
+import os
 
 def main():
-    odom_path = "ws_tp2/src/tp2/logs/log.txt"
+
+    curr_dir = os.path.dirname(__file__)
+    odom_path = os.path.join(curr_dir, "../logs/log.txt")
     odom_trajectory = []
     velos = []
-
     ## Parsear los datos del archivo log.txt
     try:
         with open(odom_path, 'r') as file:

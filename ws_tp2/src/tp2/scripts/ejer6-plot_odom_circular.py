@@ -3,10 +3,11 @@
 import csv
 import numpy as np
 import matplotlib.pyplot as plt
-import re
+import re, os
 
 def main():
-    odom_path = "ws_tp2/src/tp2/logs/log_circular.txt"
+    curr_dir = os.path.dirname(__file__)
+    odom_path = os.path.join(curr_dir, "../logs/log_circular.txt")
     odom_trajectory = []
     velos = []
 

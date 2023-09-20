@@ -3,10 +3,11 @@
 import csv
 import numpy as np
 import matplotlib.pyplot as plt
-import re
+import re, os
 
 def main():
-    odom_path = "ws_tp2/src/tp2/logs/log_circular.txt"
+    curr_dir = os.path.dirname(__file__)
+    odom_path = os.path.join(curr_dir, "../logs/log_circular.txt")
     odom_trajectory = []
     velos = []
 
@@ -88,7 +89,10 @@ def main():
     # Punto c. Diversos graficos con todas las posibilidades de signos de las velocidades
     # Indicar en el gráfico el sentido de avance del robot
     ## Parsear los datos del archivo log_cirXX.txt
-    circ_path = ["ws_tp2/src/tp2/logs/log_cir1.txt",  "ws_tp2/src/tp2/logs/log_cir2.txt", "ws_tp2/src/tp2/logs/log_cir3.txt", "ws_tp2/src/tp2/logs/log_cir4.txt"]
+    circ_path = [os.path.join(curr_dir, "../logs/log_cir1.txt"), 
+                 os.path.join(curr_dir, "../logs/log_cir2.txt"), 
+                 os.path.join(curr_dir, "../logs/log_cir3.txt"), 
+                 os.path.join(curr_dir, "../logs/log_cir4.txt")]
     colores = ['b', 'g', 'r', 'k']
     titulos = ['v+, w+', 'v+, w-', 'v-, w-', 'v-, w+']
     t = []
