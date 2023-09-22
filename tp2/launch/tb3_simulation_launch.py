@@ -29,6 +29,7 @@ from launch_ros.actions import Node
 def generate_launch_description():
     # Get the launch directory
     bringup_dir = get_package_share_directory('nav2_bringup')
+    tp2_dir = get_package_share_directory('tp2')
     launch_dir = os.path.join(bringup_dir, 'launch')
     gazebo_dir = os.environ.get('GAZEBO_RESOURCE_PATH'),
     print("{}".format(gazebo_dir)),
@@ -119,8 +120,7 @@ def generate_launch_description():
 
     declare_rviz_config_file_cmd = DeclareLaunchArgument(
         'rviz_config_file',
-        default_value=os.path.join(
-            bringup_dir, 'rviz', 'nav2_default_view.rviz'),
+        default_value=os.path.join(tp2_dir, 'config', 'cofig_tp.rviz'),
         description='Full path to the RVIZ config file to use')
 
     declare_use_simulator_cmd = DeclareLaunchArgument(
@@ -228,7 +228,7 @@ def generate_launch_description():
     # Declare the launch options
     ld.add_action(declare_namespace_cmd)
     ld.add_action(declare_use_namespace_cmd)
-    #ld.add_action(declare_slam_cmd)
+    # ld.add_action(declare_slam_cmd)
     # ld.add_action(declare_map_yaml_cmd)
     ld.add_action(declare_use_sim_time_cmd)
     # ld.add_action(declare_params_file_cmd)

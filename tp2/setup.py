@@ -11,6 +11,7 @@ setup(
             ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
         ('share/' + package_name + '/launch', ['launch/tb3_simulation_launch.py']),
+        ('share/' + package_name + '/config', ['config/config_tp.rviz']),
     ],
     install_requires=['setuptools'],
     zip_safe=True,
