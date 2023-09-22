@@ -18,6 +18,10 @@ if [ "$USER" != "root" ]; then
     [ -d "/dev/snd" ] && chgrp -R adm /dev/snd
 fi
 
+cd /home/ubuntu/catkin_ws
+colcon build
+source ./install/setup.sh
+
 # VNC password
 VNC_PASSWORD=${PASSWORD:-ubuntu}
 
