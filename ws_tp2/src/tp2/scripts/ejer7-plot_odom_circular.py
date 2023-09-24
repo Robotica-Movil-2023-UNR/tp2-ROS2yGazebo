@@ -66,21 +66,24 @@ def main():
     pos2 = 800
     pos3 = 1400
     # Puntos en el camino del robot
-    ax1.plot(pose_tbl[pos1,1], pose_tbl[pos1,2], 'xr')
-    ax1.plot(pose_tbl[pos2,1], pose_tbl[pos2,2], 'xr')
-    ax1.plot(pose_tbl[pos3,1], pose_tbl[pos3,2], 'xr')
+    # ax1.plot(pose_tbl[pos1,1], pose_tbl[pos1,2], 'xr')
+    ax1.plot(pose_tbl[pos1,1], pose_tbl[pos1,2], marker=(3, 0, -90+pose_tbl[pos1,3]*180/np.pi), linestyle='None', markersize=10, color='r')
+    # ax1.plot(pose_tbl[pos2,1], pose_tbl[pos2,2], 'xr')
+    ax1.plot(pose_tbl[pos2,1], pose_tbl[pos2,2], marker=(3, 0, -90+pose_tbl[pos2,3]*180/np.pi), linestyle='None', markersize=10, color='g')
+    # ax1.plot(pose_tbl[pos3,1], pose_tbl[pos3,2], 'xr')
+    ax1.plot(pose_tbl[pos3,1], pose_tbl[pos3,2], marker=(3, 0, -90+pose_tbl[pos3,3]*180/np.pi), linestyle='None', markersize=10, color='b')
     # Puntos en la trayectoria X
-    ax2[0].plot(pose_tbl[pos1,0], pose_tbl[pos1,1], 'xr')
-    ax2[0].plot(pose_tbl[pos2,0], pose_tbl[pos2,1], 'xr')
-    ax2[0].plot(pose_tbl[pos3,0], pose_tbl[pos3,1], 'xr')
+    ax2[0].plot(pose_tbl[pos1,0], pose_tbl[pos1,1], 'or')
+    ax2[0].plot(pose_tbl[pos2,0], pose_tbl[pos2,1], 'og')
+    ax2[0].plot(pose_tbl[pos3,0], pose_tbl[pos3,1], 'ob')
     # Puntos en la trayectoria Y 
-    ax2[1].plot(pose_tbl[pos1,0], pose_tbl[pos1,2], 'xb')
-    ax2[1].plot(pose_tbl[pos2,0], pose_tbl[pos2,2], 'xb')
-    ax2[1].plot(pose_tbl[pos3,0], pose_tbl[pos3,2], 'xb')
+    ax2[1].plot(pose_tbl[pos1,0], pose_tbl[pos1,2], 'or')
+    ax2[1].plot(pose_tbl[pos2,0], pose_tbl[pos2,2], 'og')
+    ax2[1].plot(pose_tbl[pos3,0], pose_tbl[pos3,2], 'ob')
     # Puntos en la trayectoria yaw
-    ax2[2].plot(pose_tbl[pos1,0], pose_tbl[pos1,3], 'xg')
-    ax2[2].plot(pose_tbl[pos2,0], pose_tbl[pos2,3], 'xg')
-    ax2[2].plot(pose_tbl[pos3,0], pose_tbl[pos3,3], 'xg')
+    ax2[2].plot(pose_tbl[pos1,0], pose_tbl[pos1,3], 'or')
+    ax2[2].plot(pose_tbl[pos2,0], pose_tbl[pos2,3], 'og')
+    ax2[2].plot(pose_tbl[pos3,0], pose_tbl[pos3,3], 'ob')
     
     # Punto a, el rango de X e Y y por qué
 
@@ -100,6 +103,7 @@ def main():
     y = []
     
     fig3, axs3 = plt.subplots(2,2)
+    fig3.suptitle('Camino', fontsize=16)
     axs = axs3.ravel()
 
     for idx in range(len(circ_path)):

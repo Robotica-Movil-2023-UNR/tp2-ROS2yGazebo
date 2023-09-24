@@ -34,9 +34,10 @@ def main():
 
     # Punto a, el camino del robot
     fig1 = plt.figure()
+    fig1.suptitle('Camino circular', fontsize=16)
     ax1 = fig1.add_subplot(111, aspect='equal')
     ax1.plot(pose_tbl[:,1], pose_tbl[:,2], 'b', label='Camino')
-    ax1.legend()
+    # ax1.legend()
     ax1.set_ylabel('Y [mts]')
     ax1.set_xlabel('X [mts]')
     ax1.grid()
