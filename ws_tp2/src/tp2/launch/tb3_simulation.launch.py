@@ -33,7 +33,7 @@ def generate_launch_description():
     gazebo_dir = os.environ.get('GAZEBO_RESOURCE_PATH'),
     print("{}".format(gazebo_dir)),
     gazebo_dir = 'usr/share/gazebo/../../share/gazebo-11'
-    package_dir = '/home/taihu/ros2_ws/src/tb3_empty_world/'
+    package_dir = '/ws_tp2/src/tp2/'
 
     # Create the launch configuration variables
     slam = LaunchConfiguration('slam')
@@ -46,7 +46,7 @@ def generate_launch_description():
     use_composition = LaunchConfiguration('use_composition')
     use_respawn = LaunchConfiguration('use_respawn')
 
-    world = '/home/taihu/ros2_ws/src/tb3_empty_world/worlds/world_only.model'
+    world = '/ws_tp2/src/tp2/world/world_only.model'
 
     # Launch configuration variables specific to simulation
     rviz_config_file = LaunchConfiguration('rviz_config_file')
